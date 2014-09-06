@@ -3,7 +3,7 @@
 if (!function_exists("apache_request_headers")) {
     function apache_request_headers()
     {
-        static $headers = NULL;
+        static $headers = null;
 
         if (!$headers) {
             $headers = array();
@@ -40,7 +40,7 @@ if (!function_exists("apache_response_headers")) {
 }
 
 if (!function_exists("http_response_code")) {
-    function http_response_code($_code = NULL)
+    function http_response_code($_code = null)
     {
         static $codes = array(
             100 => "Continue",
@@ -85,15 +85,15 @@ if (!function_exists("http_response_code")) {
             505 => "HTTP Version Not Supported",
         );
 
-        static $code = NULL;
+        static $code = null;
 
         if ($_code !== NULL) {
             if (!isset($codes[$_code])) {
-                exit("Unknown http status code \"" . htmlentities($_code) . "\"");
+                exit('Unknown http status code "'.htmlentities($_code).'"');
             }
 
             $protocol = (isset($_SERVER["SERVER_PROTOCOL"]) ? $_SERVER["SERVER_PROTOCOL"] : "HTTP/1.0");
-            header($protocol . " " . $_code . " " . $codes[$_code]);
+            header("$protocol $_code {$codes[$_code]}");
             $code = $_code;
         }
 
